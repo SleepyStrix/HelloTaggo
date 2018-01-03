@@ -11,23 +11,46 @@ using System.IO;
 
 namespace HelloTaggo {
     public partial class Form1 : Form {
-
+        const string tag_delimiter = "-";
         private bool valid_file_loaded = false;
         string original_file_path;
 
         private HashSet<string> tags;
+        private string tag_file_directory;
+        private string tag_file_path = "";
         public Form1() {
             InitializeComponent();
             tags = new HashSet<string>();
-
+            tag_file_directory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            tag_file_directory = Path.Combine(tag_file_directory, "HelloTaggo");
+            tag_file_path = Path.Combine(tag_file_directory, "default_tag_set.txt");
             /*string[] args = Environment.GetCommandLineArgs();
             /*foreach (string s in args) {
                 Console.WriteLine("FORM ARG: " + s);
             }*/
-           /* string path = args[1];
-            Console.WriteLine("LOAD PATH: " + path);
-            SetOriginalFile(path);
-            Console.WriteLine("File is valid: " + valid_file_loaded.ToString());*/
+            /* string path = args[1];
+             Console.WriteLine("LOAD PATH: " + path);
+             SetOriginalFile(path);
+             Console.WriteLine("File is valid: " + valid_file_loaded.ToString());*/
+            LoadTagSet();
+            tagControl.SetupAutoComplete(tags.ToArray()); //update autocomplete
+        }
+
+        private void LoadTagSet() {
+            if (File.Exists(tag_file_path)) {
+                string[] tag_list = File.ReadAllLines(tag_file_path);
+                foreach (string tag in tag_list) {
+                    if (!tags.Contains(tag)) {
+                        tags.Add(tag);
+                    }
+                }
+            }
+        }
+
+        private void SaveTagSet() {
+            LoadTagSet();
+            Directory.CreateDirectory(tag_file_directory);
+            File.WriteAllLines(tag_file_path, tags.ToArray());
         }
 
         private void tagControl_KeyUp(object sender, KeyEventArgs e) {
@@ -38,7 +61,7 @@ namespace HelloTaggo {
             //revalidate file
             if (tagControl.Tags.Count > 0 && valid_file_loaded && Validate_File(original_file_path)) {
                 string original_file_dir = Path.GetDirectoryName(original_file_path);
-                string output_file_name = String.Join("-", tagControl.Tags.ToArray());
+                string output_file_name = String.Join(tag_delimiter, tagControl.Tags.ToArray());
                 string extension = Path.GetExtension(original_file_path);
                 string output_file_path = Path.Combine(original_file_dir, output_file_name + extension);
                 string unique_output_path = output_file_path;
@@ -62,6 +85,7 @@ namespace HelloTaggo {
                 }
                 //switch target to new file, allowing continuous edits
                 SetOriginalFile(output_file_path, false);
+                SaveTagSet(); //persist new tags to file (if any)
                 tagControl.SetupAutoComplete(tags.ToArray()); //update autocomplete
             }
         }

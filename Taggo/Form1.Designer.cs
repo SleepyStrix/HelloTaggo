@@ -30,12 +30,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.fileDropPanel = new System.Windows.Forms.Panel();
             this.fileNameLabel = new System.Windows.Forms.TextBox();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(220, 35);
+            this.label1.Location = new System.Drawing.Point(220, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 13);
             this.label1.TabIndex = 1;
@@ -43,7 +45,7 @@
             // 
             // tagControl
             // 
-            this.tagControl.Location = new System.Drawing.Point(220, 51);
+            this.tagControl.Location = new System.Drawing.Point(220, 39);
             this.tagControl.Name = "tagControl";
             this.tagControl.Size = new System.Drawing.Size(332, 250);
             this.tagControl.TabIndex = 0;
@@ -52,7 +54,7 @@
             // 
             // SubmitButton
             // 
-            this.SubmitButton.Location = new System.Drawing.Point(477, 316);
+            this.SubmitButton.Location = new System.Drawing.Point(477, 304);
             this.SubmitButton.Name = "SubmitButton";
             this.SubmitButton.Size = new System.Drawing.Size(75, 23);
             this.SubmitButton.TabIndex = 2;
@@ -73,7 +75,7 @@
             // 
             this.fileDropPanel.AllowDrop = true;
             this.fileDropPanel.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.fileDropPanel.Location = new System.Drawing.Point(14, 51);
+            this.fileDropPanel.Location = new System.Drawing.Point(14, 39);
             this.fileDropPanel.Name = "fileDropPanel";
             this.fileDropPanel.Size = new System.Drawing.Size(200, 250);
             this.fileDropPanel.TabIndex = 6;
@@ -84,18 +86,23 @@
             // 
             this.fileNameLabel.CausesValidation = false;
             this.fileNameLabel.Enabled = false;
-            this.fileNameLabel.Location = new System.Drawing.Point(13, 25);
+            this.fileNameLabel.Location = new System.Drawing.Point(13, 13);
             this.fileNameLabel.Name = "fileNameLabel";
             this.fileNameLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.fileNameLabel.Size = new System.Drawing.Size(201, 20);
             this.fileNameLabel.TabIndex = 7;
             this.fileNameLabel.Text = "File name shown here";
             // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 351);
+            this.ClientSize = new System.Drawing.Size(564, 335);
             this.Controls.Add(this.fileNameLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.SubmitButton);
@@ -104,6 +111,7 @@
             this.Controls.Add(this.fileDropPanel);
             this.Name = "Form1";
             this.Text = "HelloTaggo File Tagger";
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,6 +125,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel fileDropPanel;
         private System.Windows.Forms.TextBox fileNameLabel;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }
 
