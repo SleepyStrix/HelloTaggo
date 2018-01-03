@@ -11,7 +11,7 @@ using System.IO;
 
 namespace HelloTaggo {
     public partial class Form1 : Form {
-        const string tag_delimiter = "-";
+        const string tag_delimiter = " ";
         private bool valid_file_loaded = false;
         string original_file_path;
 
