@@ -24,14 +24,7 @@ namespace HelloTaggo {
             tag_file_directory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             tag_file_directory = Path.Combine(tag_file_directory, "HelloTaggo");
             tag_file_path = Path.Combine(tag_file_directory, "default_tag_set.txt");
-            /*string[] args = Environment.GetCommandLineArgs();
-            /*foreach (string s in args) {
-                Console.WriteLine("FORM ARG: " + s);
-            }*/
-            /* string path = args[1];
-             Console.WriteLine("LOAD PATH: " + path);
-             SetOriginalFile(path);
-             Console.WriteLine("File is valid: " + valid_file_loaded.ToString());*/
+
             LoadTagSet();
             tagControl.SetupAutoComplete(tags.ToArray()); //update autocomplete
         }
