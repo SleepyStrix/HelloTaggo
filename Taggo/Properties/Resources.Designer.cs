@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Taggo.Properties {
+namespace HelloTaggo.Properties {
 
 
     /// <summary>
